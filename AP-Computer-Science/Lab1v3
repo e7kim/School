@@ -10,10 +10,6 @@ import java.util.Scanner;
 
 public class Lab1_EK
 {
-
-	private static final boolean False = false;
-	private static final boolean True = false;
-
 	public static void main(String[] args) 
 	{
 		Scanner scanIn = new Scanner(System.in);
@@ -22,67 +18,95 @@ public class Lab1_EK
 		int posint1;
 		int posint2;
 		double posdoub1;
-		
+		int repeat;
 		
 		do
 		{
-			System.out.print("Please enter an integer to choose a simple algorithm from below: " + "\n");
-			System.out.print("1. Find all the factors of a positive integer." + "\n");
-			System.out.print("2. Find the GCD of two positive integer parameters." + "\n");
-			System.out.print("3. Determine if a given integer greater than one is prime." + "\n");
-			System.out.print("4. Raise a given real number to a given integer power." + "\n");
-			System.out.print("5. Return the nth digit (a positive integer) from the right of a given integer" + "\n");
-			System.out.print("6. List the digits of a positive integer in one column." + "\n");
-			System.out.print("7. Return the number of digits to the left of the decimal point of a valid decimal point number." + "\n");
-			option = scanIn.nextInt();
-		}while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option !=6 && option != 7);
-		if (option == 1)
-		{
 			do
 			{
-				System.out.print("Please enter a positive integer: " + "\n");
-				posint1 = scanIn.nextInt();
-			}while (posint1 <= 0);
-			factors(posint1);
-		}
-		else if (option == 2)
-		{
-			do
+				System.out.print("Please enter an integer to choose a simple algorithm from below: " + "\n");
+				System.out.print("1. Find all the factors of a positive integer." + "\n");
+				System.out.print("2. Find the GCD of two positive integer parameters." + "\n");
+				System.out.print("3. Determine if a given integer greater than one is prime." + "\n");
+				System.out.print("4. Raise a given real number to a given integer power." + "\n");
+				System.out.print("5. Return the nth digit (a positive integer) from the right of a given integer" + "\n");
+				System.out.print("6. List the digits of a positive integer in one column." + "\n");
+				System.out.print("7. Return the number of digits to the left of the decimal point of a valid decimal point number." + "\n");
+				option = scanIn.nextInt();
+			}while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option !=6 && option != 7);
+			if (option == 1)
 			{
-				System.out.print("Please enter two positive integers: " + "\n");
-				posint1 = scanIn.nextInt();
-				posint2 = scanIn.nextInt();
-			}while (posint1 <= 0 || posint2 <= 0);
-			System.out.print("The GCD of " + posint1 + " and " + posint2 + " is " + gcd(posint1, posint2) + ".");
-		}
-		else if (option == 3)
-		{
-			do
+				do
+				{
+					System.out.print("Please enter a positive integer: " + "\n");
+					posint1 = scanIn.nextInt();
+				}while (posint1 <= 0);
+				factors(posint1);
+			}
+			else if (option == 2)
 			{
-				System.out.print("Please enter a positive integer: " + "\n");
-				posint1 = scanIn.nextInt();
-			}while (posint1 <= 1);
-			System.out.print(prime(posint1));
-//			if (prime(posint1) == True)
-//				System.out.print(posint1 + " is a prime number.");
-//			else
-//				System.out.print(posint1 + " is not a prime number.");
-		}
-		else if (option == 4)
-		{
-				System.out.print("Please enter a real number bass and an integer exponent: " + "\n");
+				do
+				{
+					System.out.print("Please enter two positive integers: " + "\n");
+					posint1 = scanIn.nextInt();
+					posint2 = scanIn.nextInt();
+				}while (posint1 <= 0 || posint2 <= 0);
+				System.out.print("The GCD of " + posint1 + " and " + posint2 + " is " + gcd(posint1, posint2) + ".");
+			}
+			else if (option == 3)
+			{
+				do
+				{
+					System.out.print("Please enter a positive integer: " + "\n");
+					posint1 = scanIn.nextInt();
+				}while (posint1 <= 1);
+				if (prime(posint1) == true)
+					System.out.print(posint1 + " is a prime number.");
+				else
+					System.out.print(posint1 + " is not a prime number.");
+			}
+			else if (option == 4)
+			{
+				do
+				{
+					System.out.print("Please enter a real number base and an integer exponent: " + "\n");
+					posdoub1 = scanIn.nextDouble();
+					posint1 = scanIn.nextInt();
+				}while (posdoub1 == 0 && posint1 <= 0);
+					System.out.print(posdoub1 + " raised to the " + posint1 + " power is " + power(posdoub1, posint1));
+			}
+			else if (option == 5)
+			{
+				do
+				{
+					System.out.print("Please enter a number and the nth digit from the right you would like to return: " + "\n");
+					posint1 = scanIn.nextInt();
+					posint2 = scanIn.nextInt();
+				}while (posint2 <= 0);
+				System.out.print("The " + posint2 + "th digit from the right of " + posint1 + " is " + findDigit(posint1, posint2) + ".");
+			}
+			else if (option == 6)
+			{
+				do
+				{
+					System.out.print("Please enter a positive integer: " + "\n");
+					posint1 = scanIn.nextInt();
+				}while (posint1 <= 0);
+				downDigits(posint1);
+			}
+			else if (option == 7)
+			{
+				System.out.print("Please enter a valid decimal point number: " + "\n");
 				posdoub1 = scanIn.nextDouble();
-				posint1 = scanIn.nextInt();
-				System.out.print(posdoub1 + " raised to the " + posint1 + " power is " + power(posdoub1, posint1));
-		}
-		else if (option == 5)
-		{
-			System.out.print("Please enter a number and the nth digit from the right you would like to return: " + "\n");
-			posint1 = scanIn.nextInt();
-			posint2 = scanIn.nextInt();
-			System.out.print("The " + posint2 + "the digit from the right of " + posint1 + " is " + findDigit(posint1, posint2));
-		}
-		
+				System.out.print("There is/are " + countDigits(posdoub1) + " digit(s) to the left of " + posdoub1 + ".");
+			}
+			
+			do
+			{
+				System.out.print("\n" + "Would you like to choose another option?" + "\n" + "1. Yes" + "\n" + "2. No" + "\n");
+				repeat = scanIn.nextInt();
+			}while (repeat != 1 && repeat != 2);
+		}while (repeat == 1);
 		
 		scanIn.close();
 	}
@@ -107,14 +131,14 @@ public class Lab1_EK
 			return gcd(b, a%b);
 	}
 	
-	public static boolean prime(int num) // HELP
+	public static boolean prime(int num)
 	{
-		boolean prime = True;
-		for (int i = 2; i < num / 2; i++)
+		boolean prime = true;
+		for (int i = 2; i < num; i++)
 		{
 			if (num % i == 0)
 			{
-				prime = False;
+				prime = false;
 			}
 		}
 		return prime;
@@ -142,44 +166,32 @@ public class Lab1_EK
 	
 	public static int findDigit(int num, int n)
 	{
-		int divisor = 1;
 		if (num < 0)
 			num = -num;
-		if (n > countDigits((double) num) || num == 0)
+		else if (n > countDigits((double) num) || num == 0)
 			return 0;
-		else //if (num > 0)
-		{
-			for (int i = 0; i < n; i++)
+		for (int i = 1; i < n; i++)
 			{
-				divisor = divisor/10;
+				num = num / 10;
 			}
-			return (num/divisor)%10;
-		}
-//		else if (num < 0)
-//		{
-//			for (int i = 0; i < n-1; i++)
-//			{
-//				divisor = divisor/10;
-//			}
-//			return 10-(num/divisor)%10;
-//		}
+		return num % 10;
 	}
 	
 	public static void downDigits(int num)
 	{
-//		int numberOfDigits = countDigits((double) num);
-//		for (int i = 0; i < numberOfDigits; i++)
-//		{
-//			System.out.print(findDigit(num, 1) + "\n");
-//			num = num/10;
-//		}
-		
+		int numberOfDigits = countDigits((double) num);
+		for (int i = 0; i < numberOfDigits; i++)
+		{
+			System.out.print(findDigit(num, numberOfDigits - i) + "\n");
+		}
 	}
 	
 	public static int countDigits(double num)
 	{
 		int digits = 1;
-		while (num > 10)
+		if (num < 0)
+			num = -num;
+		while (num >= 10)
 		{
 			num = num/10;
 			digits = digits + 1;
@@ -187,4 +199,3 @@ public class Lab1_EK
 		return digits;
 	}
 }
-
