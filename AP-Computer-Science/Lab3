@@ -1,0 +1,72 @@
+/* Name: Eugene Kim
+ * Lab 1: Simple Algorithms
+ * AP Computer Science
+ * E Block
+ * Teacher: Mr. Harris
+ * 9/16/16
+ */
+
+import java.util.Scanner;
+
+public class Lab3_EK 
+{
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in);
+
+	}
+	public static void letters(char letter)
+	{
+		if (letter == 'a')
+			System.out.print(letter);
+		else
+			System.out.print(letter);
+			int ascii = (int) letter;
+			letters((char) (ascii - 1));
+	}
+	public int twos(int num)
+	{
+		if (num % 2 != 0)
+			return 0;
+		else
+			return 1 + (num / 2);
+	}
+	public static boolean powerOf3(int num)
+	{
+		if (num % 3 == 0)
+			return true;
+		else if (num == 0)
+			return false;
+		else
+			powerOf3(num / 3);
+	}
+	int reverse(int num)
+	{
+		int digits;
+		if (num < 10)
+			System.out.println(num);
+		else
+			digits = helperTotalDigits(num);
+			System.out.println(num % 10);
+			return reverse(num/10);
+	}
+
+	Void printWithCommas(int num)
+	{
+		int digits = 0;
+		if (num < 1000)
+			System.out.println(num);
+		else
+			digits = helperTotalDigits(num);
+			System.out.println(num / (digits / 3) + ",");
+			printWithCommas(num % (digits / 3));
+	}
+
+	int helperTotalDigits(int num)
+	{
+		if (num < 10)
+			return 1;
+		else
+			return 1 + helperTotalDigits(num/10);
+	}
+}
