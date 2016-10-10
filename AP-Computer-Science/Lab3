@@ -31,11 +31,10 @@ public class Lab3_EK
 		
 		if (option == 1)
 		{
-			String letter;
-			System.out.print("Please enter a letter from the alphabet");
-			letter = in.next();
+			char letter;
+			System.out.println("Please enter a letter from the alphabet:");
+			letter = in.next().charAt(0);
 			letters(letter);
-			
 		}
 		else if (option == 2)
 		{
@@ -64,14 +63,15 @@ public class Lab3_EK
 		
 
 	}
-	public static void letters(String letter)
+	public static void letters(char letter)
 	{
 		if (letter == 'a')
 			System.out.print(letter);
 		else
+		{
+			letters((char) (letter - 1));
 			System.out.print(letter);
-			int ascii = (int) letter;
-			letters((char) (ascii - 1));
+		}
 	}
 	public int twos(int num)
 	{
