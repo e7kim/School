@@ -1,9 +1,9 @@
 /* Name: Eugene Kim
- * Lab 1: Simple Algorithms
+ * Lab 3: Recursion
  * AP Computer Science
  * E Block
  * Teacher: Mr. Harris
- * 9/16/16
+ * 10/11/16
  */
 
 import java.util.Scanner;
@@ -38,13 +38,14 @@ public class Lab3_EK
 				System.out.println("Please enter a letter from the alphabet:");
 				letter = in.next().charAt(0);
 				letters(letter);
+				System.out.println();
 			}
 			else if (option == 2)
 			{
 				int number;
 				System.out.println("Please enter an integer:");
 				number = in.nextInt();
-				System.out.println("There are " + twos(number) + " factors of 2 in " + number + ".");
+				System.out.println("There is/are " + twos(number) + " factor(s) of 2 in " + number + ".");
 			}
 			else if (option == 3)
 			{
@@ -75,7 +76,7 @@ public class Lab3_EK
 				}while (number < 0);
 				System.out.print("The base five equivalent of " + number + " is ");
 				base5(number);
-				System.out.print("\n");
+				System.out.println();
 			}
 			else if (option == 6)
 			{
@@ -131,19 +132,19 @@ public class Lab3_EK
 	public static int reverse(int num)
 	{
 		boolean neg = false;
-		if(num < 0)
+		if (num < 0)
 		{
 			neg = true;
 			num *= -1;
 		}
-		if(num / 10 == 0)
+		if (num / 10 == 0)
 		{
-			if(neg)
+			if (neg == true)
 				return num * -1;
 			return num;
 		}
 		int reversed = helperDigits(num) * (num % 10)  + reverse(num / 10);
-		if(neg)
+		if (neg == true)
 			return reversed * -1;
 		return reversed;	
 	}
@@ -152,7 +153,7 @@ public class Lab3_EK
 		int quotient = num / 5;
 		int remainder = num % 5;
 
-		if (quotient == 0) // base case
+		if (quotient == 0)
 		{
 			System.out.print(remainder);    
 		}
