@@ -14,8 +14,7 @@ public class Lab3_EK
 	{
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Welcome to recursion Lab 3!" + "\n");
-		
+		System.out.println("Welcome to Recursion Lab 3!" + "\n");
 
 		int repeat;
 		do
@@ -64,17 +63,31 @@ public class Lab3_EK
 			{
 				System.out.println("Please enter an integer:");
 				int number = in.nextInt();
-				System.out.println(");
+				System.out.println("The reverse of " + number + " is " + reverse(number));
 			}
-	
 			else if (option == 5)
 			{
-				
+				int number;
+				do
+				{
+					System.out.println("Please enter a nonnegative decimal integer:");
+					number = in.nextInt();
+				}while (number < 0);
+				System.out.print("The base five equivalent of " + number + " is ");
+				base5(number);
+				System.out.print("\n");
 			}
-	
 			else if (option == 6)
 			{
-				
+				int number;
+				do
+				{
+					System.out.println("Please enter a nonnegative integer: ");
+					number = in.nextInt();
+				}while (number < 0);
+				System.out.print(number + " with commas inserted properly is ");
+				printWithCommas(number);
+				System.out.print(".\n");
 			}
 			
 			do
@@ -87,6 +100,7 @@ public class Lab3_EK
 			
 		}while (repeat == 1);
 
+		in.close();
 	}
 	public static void letters(char letter)
 	{
@@ -116,37 +130,59 @@ public class Lab3_EK
 	}
 	public static int reverse(int num)
 	{
-		//int digits;
-		if (num < 10)
-			System.out.println(num);
-		else
-			//digits = helperTotalDigits(num);
-			System.out.println(num % 10);
-			return reverse(num/10);
+		boolean neg = false;
+		if(num < 0)
+		{
+			neg = true;
+			num *= -1;
+		}
+		if(num / 10 == 0)
+		{
+			if(neg)
+				return num * -1;
+			return num;
+		}
+		int reversed = helperDigits(num) * (num % 10)  + reverse(num / 10);
+		if(neg)
+			return reversed * -1;
+		return reversed;	
 	}
-	public static void base5(int num)
+	public static void base5(int num)          
 	{
-		if (num < 5)
-			System.out.print(num);
+		int quotient = num / 5;
+		int remainder = num % 5;
+
+		if (quotient == 0) // base case
+		{
+			System.out.print(remainder);    
+		}
 		else
-			System.out.print((num/5) % 10);
-			base5(num/5);
+		{
+			base5(quotient);
+			System.out.print(remainder);
+		}            
 	}
 	public static void printWithCommas(int num)
 	{
-		int digits = 0;
-		if (num < 1000)
-			System.out.println(num);
+		if(num < 1000)
+			System.out.print(num);
 		else
-			digits = helperTotalDigits(num);
-			System.out.println(num / (digits / 3) + ",");
-			printWithCommas(num % (digits / 3));
+		{
+			printWithCommas(num / 1000);
+			if((num % 1000)/10 == 0)
+				System.out.print(",00" + num % 1000);
+			else if((num % 1000)/100 == 0)
+				System.out.print(",0" + num % 1000); 
+			else
+				System.out.print("," + num % 1000);
+		}
 	}
-	public static int helperTotalDigits(int num)
+	public static int helperDigits(int num)
 	{
-		if (num < 10)
+		if(num / 10 == 0)
 			return 1;
 		else
-			return 1 + helperTotalDigits(num/10);
+			return 10 * helperDigits(num/10);
 	}
+	
 }
