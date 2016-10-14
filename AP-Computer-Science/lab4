@@ -1,0 +1,57 @@
+/* Name: Eugene Kim
+ * Lab 4: Black Box Challenge Lab
+ * AP Computer Science
+ * E Block
+ * Teacher: Mr. Harris
+ * 10/14/16
+ */
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class Lab4_EK 
+{
+
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in);
+		
+		int choice;
+		
+		char[][] blackbox = new char[10][10];
+		
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				blackbox[i][j] = '.';
+			}
+		}
+		
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				System.out.print(blackbox[i][j]);;
+			}
+			System.out.println();
+		}
+		
+		do
+		{
+			do
+			{
+				System.out.println("Choose:");
+				System.out.println("    (1) Shoot a Laser");
+				System.out.println("    (2) Guess at a mirror location");
+				System.out.println("    (0) Quit the game\n");
+				System.out.println("Enter choice:");
+				
+				choice = in.nextInt();
+			}while (choice != 1 && choice != 2 && choice != 0);
+			
+			
+		}while (choice != 0);
+	}
+
+}
