@@ -27,17 +27,14 @@ public class Lab4_EK {
 		
 		setMirrors(board);
 		
-		
-		for (int i = 9; i > -1; i--)
-		{
-			for (int j = 0; j < 10; j++)
-			{
-				System.out.print(" " + board[j][i]);;
-			}
-			System.out.println();
-		}
-		
-		
+//		for (int i = 9; i > -1; i--)
+//		{
+//			for (int j = 0; j < 10; j++)
+//			{
+//				System.out.print(" " + board[j][i]);;
+//			}
+//			System.out.println();
+//		}
 		
 		int choice=1;
 		int x=0, y=0;
@@ -56,26 +53,26 @@ public class Lab4_EK {
 					x=in.nextInt();
 					if(x<10)
 					{
-						y=0;
 						direction=1;
+						y=0;
 					}
 					else if(x<20)
 					{
+						direction=2;
 						y=x-10;
 						x=0;
-						direction=2;
 					}
 					else if(x<30)
 					{
+						direction=3;
 						x=x-20;
 						y=9;
-						direction=3;
 					}
 					else if(x<40)
 					{
+						direction=4;
 						y=39-x;
 						x=9;
-						direction=4;
 					}
 				}while(x<0||x>39);
 				System.out.println("The shot comes out at " + shootLaser(board,x,y,direction) + ".");
@@ -107,37 +104,17 @@ public class Lab4_EK {
 				System.out.println("You have taken " + shots + " shot(s) with " + guessright + " correct guess(es) and " + guesswrong + " incorrect guess(es).");
 			}
 			
-		}while((choice!=0)&&(completed(board)==false));
+		}while((choice!=0)&&(guessright!=10));
 		
 		printBoard(board);
 
-		if(completed(board)==true)
+		if(guessright==10)
 			System.out.println("You completed the board with " + shots + " shot(s) and made " + guessright + " correct guess(es) and " + guesswrong + " incorrect guess(es).");
 		else if(choice == 0)
 			System.out.println("You quit the game with " + shots + " shot(s) and " + guessright + " correct guess(es) and " + guesswrong + " incorrect guess(es).");
 		
 		in.close();
 		
-	}
-	
-	public static void setMirrors(char[][] board)
-	{
-	    Random rand = new Random();
-		int x, y;
-		for(int i=0;i<10;i++)
-		{
-			x=rand.nextInt(10);
-			y=rand.nextInt(10);
-			if(board[x][y]== '.')
-			{
-				if(rand.nextInt(2)==1)
-					board[x][y]= '/';
-				else
-					board[x][y]= '\\';
-			}
-			else
-				i--;
-		}
 	}
 	public static void printBoard(char[][] board)
 	{
@@ -157,6 +134,43 @@ public class Lab4_EK {
 			System.out.println(" " + (39-y));
 		}
 		System.out.println("   0 1 2 3 4 5 6 7 8 9");
+	}
+	public static void setMirrors(char[][] board)
+	{
+	    Random rand = new Random();
+		int x, y;
+		for(int i=0;i<10;i++)
+		{
+			x=rand.nextInt(10);
+			y=rand.nextInt(10);
+			if(board[x][y]== '.')
+			{
+				if(rand.nextInt(2)==1)
+					board[x][y]= '/';
+				else
+					board[x][y]= '\\';
+			}
+			else
+				i=i-1;
+		}
+	}
+
+	public static void check(char[][] board, int x, int y)
+	{
+		if(board[x][y]=='/')
+		{
+			board[x][y]= '1';
+			System.out.println("There is a mirror.");
+		}
+		else if(board[x][y]=='\\')
+		{
+			board[x][y]= '2';
+			System.out.println("There is a mirror.");
+		}
+		else if(board[x][y] == '1' || board[x][y] == '2')
+			System.out.println("This mirror was already found.");
+		else
+			System.out.println("There is no mirror.");
 	}
 	public static int shootLaser(char[][] board, int x, int y, int direction)
 	{
@@ -203,36 +217,5 @@ public class Lab4_EK {
 				return shootLaser(board,x-1,y,4);
 		}
 		return 0;
-	}
-	public static void check(char[][] board, int x, int y)
-	{
-		if(board[x][y]=='/')
-		{
-			board[x][y]= '1';
-			System.out.println("There is a mirror.");
-		}
-		else if(board[x][y]=='\\')
-		{
-			board[x][y]= '2';
-			System.out.println("There is a mirror.");
-		}
-		else if(board[x][y] == '1' || board[x][y] == '2')
-			System.out.println("This mirror was already found.");
-		else
-			System.out.println("There is no mirror.");
-	}
-	public static boolean completed(char[][] board)
-	{
-		for(int x=0;x<10;x++)
-		{
-			for(int y=0;y<10;y++)
-			{
-				if(board[x][y]=='/'||board[x][y]=='\\')
-				{
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 }
