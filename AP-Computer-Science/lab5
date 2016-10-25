@@ -1,0 +1,52 @@
+/* Name: Eugene Kim
+ * Lab 5: Manipulating Arrays Lab
+ * AP Computer Science
+ * E Block
+ * Teacher: Mr. Harris
+ * 10/24/16
+ */
+
+import java.util.Scanner;
+
+public class Lab5_EK {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.print("Please enter the size of your array: ");
+		int size = in.nextInt();
+		
+		int[] array = new int[size];
+		
+		System.out.println("Please enter the values of your array: ");
+		for (int i = 0; i < size; i++)
+			array[i] = in.nextInt();
+		
+		int choice;
+		do
+		{
+			System.out.println("Which tasks would you like to perform on your array?");
+			System.out.println("1. Display the arry's length as well as its indices and elements");
+			System.out.println("2. Search whether a value entered by the user is in the array");
+			System.out.println("3. Find the smallest element and exchange it with the first element");
+			System.out.println("4. Rotate the array by a given number of steps");
+			System.out.println("5. Delete all zero elements from the current array, updating the length");
+			choice = in.nextInt();
+		}while(choice != 1 && choice !=2 && choice != 3 && choice != 4 && choice != 5);
+		
+		if (choice == 1)
+			displayArrayLength(array);
+		
+		in.close();
+	}
+	public static void displayArrayLength(int array[])
+	{
+		System.out.println("size of array: " + array.length);
+		System.out.print("array positions:   ");
+		for (int i = 0; i < array.length; i++)
+			System.out.print(i + "    ");
+		System.out.print("\narray entries:    ");
+		for (int i = 0; i < array.length; i++)
+			System.out.print(array[i] + "    ");
+	}
+}
