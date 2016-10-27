@@ -61,7 +61,6 @@ public class Lab5_EK {
 		
 		in.close();
 	}
-	Scanner in = new Scanner(System.in);
 	public static void displayArrayLength(int array[])
 	{
 		System.out.println("size of array: " + array.length);
