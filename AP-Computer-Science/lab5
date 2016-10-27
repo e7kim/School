@@ -18,35 +18,171 @@ public class Lab5_EK {
 		
 		int[] array = new int[size];
 		
-		System.out.println("Please enter the values of your array: ");
+		System.out.print("Please enter the values of your array: ");
 		for (int i = 0; i < size; i++)
 			array[i] = in.nextInt();
 		
 		int choice;
+		int repeat;
 		do
 		{
-			System.out.println("Which tasks would you like to perform on your array?");
-			System.out.println("1. Display the arry's length as well as its indices and elements");
-			System.out.println("2. Search whether a value entered by the user is in the array");
-			System.out.println("3. Find the smallest element and exchange it with the first element");
-			System.out.println("4. Rotate the array by a given number of steps");
-			System.out.println("5. Delete all zero elements from the current array, updating the length");
-			choice = in.nextInt();
-		}while(choice != 1 && choice !=2 && choice != 3 && choice != 4 && choice != 5);
-		
-		if (choice == 1)
-			displayArrayLength(array);
+			do
+			{
+				System.out.println("Which tasks would you like to perform on your array?");
+				System.out.println("1. Display the array's length as well as its indices and elements");
+				System.out.println("2. Search whether a value entered by the user is in the array");
+				System.out.println("3. Find the smallest element and exchange it with the first element");
+				System.out.println("4. Rotate the array by a given number of steps");
+				System.out.println("5. Delete all zero elements from the current array, updating the length");
+				choice = in.nextInt();
+			}while(choice != 1 && choice !=2 && choice != 3 && choice != 4 && choice != 5);
+
+			if (choice == 1)
+				displayArrayLength(array);
+			else if (choice == 2)
+				search(array);
+			else if (choice == 3)
+				findSmall(array);
+			else if (choice == 4)
+				rotateArray(array);
+			else if (choice == 5)
+			{
+				array = deleteZeros(array);
+				displayArrayLength(array);
+			}
+
+			do
+			{
+				System.out.println("Would you like to perform another task?");
+				System.out.println("1. Yes");
+				System.out.println("2. No");
+				repeat = in.nextInt();
+			}while (repeat != 1 && repeat != 2);
+		}while (repeat == 1);
 		
 		in.close();
 	}
 	public static void displayArrayLength(int array[])
 	{
 		System.out.println("size of array: " + array.length);
-		System.out.print("array positions:   ");
+		System.out.print("array positions:");
 		for (int i = 0; i < array.length; i++)
-			System.out.print(i + "    ");
-		System.out.print("\narray entries:    ");
+			System.out.printf("%5d", i);
+		System.out.print("\narray entries:  ");
 		for (int i = 0; i < array.length; i++)
-			System.out.print(array[i] + "    ");
+			System.out.printf("%5d", array[i]);
+		System.out.println();
+	}
+	public static void search(int array[])
+	{
+		Scanner in = new Scanner(System.in);
+		String search;
+		do
+		{
+			System.out.print("What entry? ");
+			int entry = in.nextInt();
+			boolean found = false;
+			for (int i = 0; i < array.length; i++)
+			{
+				if (array[i] == entry && found == false)
+				{
+					System.out.println("status: found at position " + i);
+					found = true;
+				}
+			}
+			if (found == false)
+				System.out.println("status: not found");
+			do
+			{
+				System.out.print("another search (yes/no)?");
+				search = in.next(); 
+			}while (!search.equals("yes") && !search.equals("no"));
+		}while (search.equals("yes"));
+	}
+	public static void findSmall(int array[])
+	{
+		int small = array[0];
+		int position = 0;
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] < small)
+			{
+				small = array[i];
+				position = i;
+			}
+		}
+		array[position] = array[0];
+		array[0] = small;
+		System.out.println("Smallest element first");
+		System.out.print("array positions:");
+		for (int i = 0; i < array.length; i++)
+			System.out.printf("%5d", i);
+		System.out.print("\narray entries:  ");
+		for (int i = 0; i < array.length; i++)
+			System.out.printf("%5d", array[i]);
+		System.out.println();
+	}
+	public static void rotateArray(int array[])
+	{
+		Scanner in = new Scanner(System.in);
+		String rotate;
+		int steps;
+		do
+		{
+			System.out.print("how many steps? ");
+			steps = in.nextInt();
+			steps = steps % array.length;
+			if (steps < 0)
+				steps += array.length;
+			System.out.println("rotated array");
+			
+			System.out.println("STEPS " + steps);
+			
+			int store;
+			
+			for (int i = 0; i < steps; i++)
+			{
+				store = array[array.length - 1];
+				for (int j = array.length - 1; j > 0; j--)
+				{
+					array[j] = array[j - 1];
+				}
+				array[0] = store;
+			}
+			
+			System.out.print("array positions:");
+			for (int i = 0; i < array.length; i++)
+				System.out.printf("%5d", i);
+			System.out.print("\narray entries:  ");
+			for (int i = 0; i < array.length; i++)
+				System.out.printf("%5d", array[i]);
+			System.out.println();
+			do
+			{
+				System.out.print("rotate again (yes/no)?");
+				rotate = in.next(); 
+			}while (!rotate.equals("yes") && !rotate.equals("no"));
+			System.out.println();
+		}while (rotate.equals("yes"));
+	}
+	public static int[] deleteZeros(int array[])
+	{
+		int zeroCounter = 0;
+		int newPosition = 0;
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] == 0)
+				zeroCounter += 1;
+		}
+		int[] newArray = new int[array.length - zeroCounter];
+		for (int i = 0; i < array.length; i++)
+		{
+			if (array[i] != 0)
+			{
+				newArray[newPosition] = array[i];
+				newPosition += 1;
+			}
+		}
+		return newArray;
 	}
 }
