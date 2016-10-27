@@ -18,50 +18,50 @@ public class Lab5_EK {
 		
 		int[] array = new int[size];
 		
-		System.out.print("Please enter the values of your array: ");
 		for (int i = 0; i < size; i++)
+		{
+			System.out.print("Please enter value for array position " + i + ": ");
 			array[i] = in.nextInt();
+		}
+		System.out.println();
 		
 		int choice;
-		int repeat;
 		do
 		{
 			do
 			{
-				System.out.println("Which tasks would you like to perform on your array?");
+				System.out.println("Which task would you like to perform?");
 				System.out.println("1. Display the array's length as well as its indices and elements");
 				System.out.println("2. Search whether a value entered by the user is in the array");
 				System.out.println("3. Find the smallest element and exchange it with the first element");
 				System.out.println("4. Rotate the array by a given number of steps");
 				System.out.println("5. Delete all zero elements from the current array, updating the length");
+				System.out.println("6. Quit program");
 				choice = in.nextInt();
-			}while(choice != 1 && choice !=2 && choice != 3 && choice != 4 && choice != 5);
+			}while(choice != 1 && choice !=2 && choice != 3 && choice != 4 && choice != 5 && choice != 6);
 
 			if (choice == 1)
 				displayArrayLength(array);
 			else if (choice == 2)
-				search(array);
+				search(array, in);
 			else if (choice == 3)
 				findSmall(array);
 			else if (choice == 4)
-				rotateArray(array);
+				rotateArray(array, in);
 			else if (choice == 5)
 			{
 				array = deleteZeros(array);
 				displayArrayLength(array);
 			}
-
-			do
-			{
-				System.out.println("Would you like to perform another task?");
-				System.out.println("1. Yes");
-				System.out.println("2. No");
-				repeat = in.nextInt();
-			}while (repeat != 1 && repeat != 2);
-		}while (repeat == 1);
+			else if (choice == 6)
+				System.out.println("Quitting program");
+			
+			System.out.println();
+		}while (choice != 6);
 		
 		in.close();
 	}
+	Scanner in = new Scanner(System.in);
 	public static void displayArrayLength(int array[])
 	{
 		System.out.println("size of array: " + array.length);
@@ -73,9 +73,8 @@ public class Lab5_EK {
 			System.out.printf("%5d", array[i]);
 		System.out.println();
 	}
-	public static void search(int array[])
+	public static void search(int array[], Scanner in)
 	{
-		Scanner in = new Scanner(System.in);
 		String search;
 		do
 		{
@@ -122,9 +121,8 @@ public class Lab5_EK {
 			System.out.printf("%5d", array[i]);
 		System.out.println();
 	}
-	public static void rotateArray(int array[])
+	public static void rotateArray(int array[], Scanner in)
 	{
-		Scanner in = new Scanner(System.in);
 		String rotate;
 		int steps;
 		do
@@ -135,8 +133,6 @@ public class Lab5_EK {
 			if (steps < 0)
 				steps += array.length;
 			System.out.println("rotated array");
-			
-			System.out.println("STEPS " + steps);
 			
 			int store;
 			
