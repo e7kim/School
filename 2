@@ -1,0 +1,70 @@
+/**
+Problem: 2 and 3
+Programming Language: C++98
+Development Framework: Code::Blocks 16.01
+Test Data:
+NUMBER              PRIME
+-1                  false
+0                   false
+1                   false
+2                   true
+3                   true
+4                   false
+5                   true
+6                   false
+7                   true
+8                   false
+9                   false
+10                  false
+13                  true
+64                  false
+71                  true
+
+Problem 2's test data:
+1. 58148527         true
+2. 665999921        true
+3. 1558438050556301 true
+
+An example of a larger prime than any of the prime numbers above being tested:
+110437474552301887  true
+*/
+
+#include <iostream>
+#include <math.h>
+
+void checkPrime(int num);
+
+using namespace std;
+
+int main()
+{
+    int num;
+
+    cout << "Please enter a number: ";
+    cin >> num;
+
+    checkPrime(num);
+
+    return 0;
+}
+void checkPrime(int num)
+{
+    bool prime = true;
+
+    if (num <= 1)
+        prime = false;
+
+    for (int i = 2; i <= sqrt(num); i++)
+    {
+        if (num % i == 0)
+        {
+            prime = false;
+            break;
+        }
+    }
+
+    if (prime == true)
+        cout << "This number is prime.";
+    else
+        cout << "This number is not prime.";
+}
