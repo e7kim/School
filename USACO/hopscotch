@@ -3,7 +3,6 @@ import java.io.*;
 
 public class hopscotch {
 
-	public static int scount = 0;
 	public static void main(String[] args) throws Exception {
 		Scanner in = new Scanner(new File("hopscotch.in"));
 		PrintWriter out = new PrintWriter(new File("hopscotch.out"));
@@ -24,10 +23,25 @@ public class hopscotch {
 		in.close();
 		
 		paths[0][0] = 1;
-		scanNext(0, 0, board, paths);
-		System.out.println(paths[R-1][C-1] % 1000000007);
-		out.println(paths[R-1][C-1] %= 1000000007);
-		System.out.println(scount);
+		
+		for (int i = 0; i < R; i++)
+		{
+			for (int j = 0; j < C; j++)
+			{
+				for (int k = i+1; k < R; k++)
+				{
+					for (int l = j+1; l < C; l++)
+					{
+						if (board[k][l] != board[i][j])
+						{
+							paths[k][l] += paths[i][j];
+							paths[k][l] %= 1000000007;
+						}
+					}
+				}
+			}
+		}
+		
 		
 		for (int i = 0; i < R; i++)
 		{
@@ -38,32 +52,11 @@ public class hopscotch {
 			System.out.println();
 		}
 		
+		
+		System.out.println(paths[R-1][C-1]);
+		out.println(paths[R-1][C-1]);
+		
 		out.close();
-	}
-	public static void scanNext(int startR, int startC, int[][] board, int[][] paths)
-	{
-		if (startR != board.length && startC != board[0].length)
-		{
-			for (int i = startR + 1; i < board.length-1; i++)
-			{
-				for (int j = startC + 1; j < board[0].length-1; j++)
-				{
-					scount++;
-					if (board[i][j] != board[startR][startC])
-					{
-						paths[i][j]++;
-						paths[i][j] %= 1000000007;
-						scanNext(i, j, board, paths);
-					}
-				}
-			}
-			if (board[board.length-1][board[0].length-1] != board[startR][startC])
-			{
-				scount++;
-				paths[paths.length-1][paths[0].length-1]++;
-			}
-		}
-
 	}
 
 }
